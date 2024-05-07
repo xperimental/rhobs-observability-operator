@@ -704,6 +704,7 @@ spec:
                 - --images=alertmanager=quay.io/prometheus/alertmanager:v0.26.0
                 - --images=prometheus=quay.io/prometheus/prometheus:v2.49.1
                 - --images=thanos=quay.io/thanos/thanos:v0.33.0
+                - --openshift.enabled=true
                 env:
                 - name: NAMESPACE
                   valueFrom:

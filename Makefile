@@ -260,6 +260,16 @@ catalog-push: catalog-tag-sha ## Push a catalog image.
 	$(CONTAINER_RUNTIME) push $(PUSH_OPTIONS) $(CATALOG_IMG_LATEST)
 	$(CONTAINER_RUNTIME) push $(PUSH_OPTIONS) $(CATALOG_IMG_SHA)
 
+## OLM Debug Deploy
+
+.PHONY: olm-deploy
+olm-deploy: operator-image operator-push bundle-image bundle-push
+	$(OPERATOR_SDK) run bundle -n openshift-operators --install-mode AllNamespaces $(BUNDLE_IMG)
+
+.PHONY: olm-upgrade
+olm-upgrade: operator-image operator-push bundle-image bundle-push
+	$(OPERATOR_SDK) run bundle-upgrade -n openshift-operators $(BUNDLE_IMG)
+
 ## package-operator package
 
 # The image tag given to the resulting package image
