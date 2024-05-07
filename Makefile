@@ -19,6 +19,10 @@ all: operator
 
 ## Development
 
+.PHONY: test-unit
+test-unit:
+	go list ./... | grep -v test/e2e | xargs go test -cover
+
 .PHONY: lint
 lint: lint-golang lint-jsonnet lint-shell
 
