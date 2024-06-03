@@ -117,20 +117,10 @@ type LoggingConfig struct {
 	// +kubebuilder:validation:Required
 	LokiStack LokiStackReference `json:"lokiStack"`
 
-	// LogsLimit is the max number of entries returned for a query.
+	// Frontend can be used to customize options on the Logging frontend.
 	//
-	// +kubebuilder:validation:Minimum=0
-	// +operator-sdk:csv:customresourcedefinitions:type=spec,displayName="OCP Console Log Limit",xDescriptors={"urn:alm:descriptor:com.tectonic.ui:ocpConsoleLogLimit"}
-	LogsLimit int32 `json:"logsLimit,omitempty"`
-
-	// Timeout is the maximum duration before a query timeout.
-	//
-	// The value is expected to be a sequence of digits followed by an optional unit suffix, which can be 's' (seconds)
-	// or 'm' (minutes). If the unit is omitted, it defaults to seconds.
-	//
-	// +operator-sdk:csv:customresourcedefinitions:type=spec,displayName="OCP Console Query Timeout",xDescriptors={"urn:alm:descriptor:com.tectonic.ui:ocpConsoleTimeout"}
-	// +kubebuilder:validation:Pattern:="^([0-9]+)([sm]{0,1})$"
-	Timeout string `json:"timeout,omitempty"`
+	// +kubebuilder:validation:Optional
+	Frontend *LoggingFrontendConfig `json:"frontend,omitempty"`
 }
 
 // LokiStackReference is used to configure a reference to a LokiStack that should be used
@@ -145,6 +135,24 @@ type LokiStackReference struct {
 	// +kubebuilder:validation:Required
 	// +kubebuilder:validation:MinLength:=1
 	Name string `json:"name"`
+}
+
+// LoggingFrontendConfig contains options that can be used to customize the behavior of the logging frontend.
+type LoggingFrontendConfig struct {
+	// LogsLimit is the max number of entries returned for a query.
+	//
+	// +kubebuilder:validation:Minimum=0
+	// +operator-sdk:csv:customresourcedefinitions:type=spec,displayName="OCP Console Log Limit",xDescriptors={"urn:alm:descriptor:com.tectonic.ui:ocpConsoleLogLimit"}
+	LogsLimit int32 `json:"logsLimit,omitempty"`
+
+	// Timeout is the maximum duration before a query timeout.
+	//
+	// The value is expected to be a sequence of digits followed by an optional unit suffix, which can be 's' (seconds)
+	// or 'm' (minutes). If the unit is omitted, it defaults to seconds.
+	//
+	// +operator-sdk:csv:customresourcedefinitions:type=spec,displayName="OCP Console Query Timeout",xDescriptors={"urn:alm:descriptor:com.tectonic.ui:ocpConsoleTimeout"}
+	// +kubebuilder:validation:Pattern:="^([0-9]+)([sm]{0,1})$"
+	Timeout string `json:"timeout,omitempty"`
 }
 
 // UIPluginSpec is the specification for desired state of UIPlugin.

@@ -87,21 +87,26 @@ func createLoggingPluginInfo(plugin *uiv1alpha1.UIPlugin, namespace, name, image
 }
 
 func marshalLoggingPluginConfig(cfg *uiv1alpha1.LoggingConfig) (string, error) {
-	if cfg.LogsLimit == 0 && cfg.Timeout == "" {
+	if cfg.Frontend == nil {
+		return "", nil
+	}
+	frontend := cfg.Frontend
+
+	if frontend.LogsLimit == 0 && frontend.Timeout == "" {
 		return "", nil
 	}
 
 	timeout := time.Duration(0)
-	if cfg.Timeout != "" {
+	if frontend.Timeout != "" {
 		var err error
-		timeout, err = parseTimeoutValue(cfg.Timeout)
+		timeout, err = parseTimeoutValue(frontend.Timeout)
 		if err != nil {
 			return "", fmt.Errorf("can not parse timeout: %w", err)
 		}
 	}
 
 	pluginCfg := loggingConfig{
-		LogsLimit: cfg.LogsLimit,
+		LogsLimit: frontend.LogsLimit,
 		Timeout:   timeout,
 	}
 

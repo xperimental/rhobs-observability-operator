@@ -113,12 +113,26 @@ spec:
 
                   It only applies to UIPlugin Type: Logging.
                 properties:
-                  logsLimit:
-                    description: LogsLimit is the max number of entries returned for
-                      a query.
-                    format: int32
-                    minimum: 0
-                    type: integer
+                  frontend:
+                    description: Frontend can be used to customize options on the
+                      Logging frontend.
+                    properties:
+                      logsLimit:
+                        description: LogsLimit is the max number of entries returned
+                          for a query.
+                        format: int32
+                        minimum: 0
+                        type: integer
+                      timeout:
+                        description: |-
+                          Timeout is the maximum duration before a query timeout.
+
+
+                          The value is expected to be a sequence of digits followed by an optional unit suffix, which can be 's' (seconds)
+                          or 'm' (minutes). If the unit is omitted, it defaults to seconds.
+                        pattern: ^([0-9]+)([sm]{0,1})$
+                        type: string
+                    type: object
                   lokiStack:
                     description: |-
                       LokiStack points to the LokiStack instance of which logs should be displayed.
@@ -132,15 +146,6 @@ spec:
                     - name
                     type: object
                     x-kubernetes-map-type: atomic
-                  timeout:
-                    description: |-
-                      Timeout is the maximum duration before a query timeout.
-
-
-                      The value is expected to be a sequence of digits followed by an optional unit suffix, which can be 's' (seconds)
-                      or 'm' (minutes). If the unit is omitted, it defaults to seconds.
-                    pattern: ^([0-9]+)([sm]{0,1})$
-                    type: string
                 required:
                 - lokiStack
                 type: object

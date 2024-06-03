@@ -3055,24 +3055,10 @@ It always references a LokiStack in the "openshift-logging" namespace.<br/>
         </td>
         <td>true</td>
       </tr><tr>
-        <td><b>logsLimit</b></td>
-        <td>integer</td>
+        <td><b><a href="#uipluginspecloggingfrontend">frontend</a></b></td>
+        <td>object</td>
         <td>
-          LogsLimit is the max number of entries returned for a query.<br/>
-          <br/>
-            <i>Format</i>: int32<br/>
-            <i>Minimum</i>: 0<br/>
-        </td>
-        <td>false</td>
-      </tr><tr>
-        <td><b>timeout</b></td>
-        <td>string</td>
-        <td>
-          Timeout is the maximum duration before a query timeout.
-
-
-The value is expected to be a sequence of digits followed by an optional unit suffix, which can be 's' (seconds)
-or 'm' (minutes). If the unit is omitted, it defaults to seconds.<br/>
+          Frontend can be used to customize options on the Logging frontend.<br/>
         </td>
         <td>false</td>
       </tr></tbody>
@@ -3103,6 +3089,47 @@ It always references a LokiStack in the "openshift-logging" namespace.
           Name of the LokiStack resource.<br/>
         </td>
         <td>true</td>
+      </tr></tbody>
+</table>
+
+
+### UIPlugin.spec.logging.frontend
+<sup><sup>[↩ Parent](#uipluginspeclogging)</sup></sup>
+
+
+
+Frontend can be used to customize options on the Logging frontend.
+
+<table>
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Type</th>
+            <th>Description</th>
+            <th>Required</th>
+        </tr>
+    </thead>
+    <tbody><tr>
+        <td><b>logsLimit</b></td>
+        <td>integer</td>
+        <td>
+          LogsLimit is the max number of entries returned for a query.<br/>
+          <br/>
+            <i>Format</i>: int32<br/>
+            <i>Minimum</i>: 0<br/>
+        </td>
+        <td>false</td>
+      </tr><tr>
+        <td><b>timeout</b></td>
+        <td>string</td>
+        <td>
+          Timeout is the maximum duration before a query timeout.
+
+
+The value is expected to be a sequence of digits followed by an optional unit suffix, which can be 's' (seconds)
+or 'm' (minutes). If the unit is omitted, it defaults to seconds.<br/>
+        </td>
+        <td>false</td>
       </tr></tbody>
 </table>
 
